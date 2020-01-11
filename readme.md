@@ -16,14 +16,13 @@ bubbleSort(Array A,int length)
 ```
 https://de.wikipedia.org/wiki/Bubblesort#Algorithmus
 
+# Ausführung
+```
+$ php controller.php [testfunction] [repeats] [output.csv]
+```
 
 # Darstellung
 Auf der Seite kann man das sich generierte csv Graphisch Darstellen lassen
 https://www.diagrammerstellen.de/graph?selected_graph=line
 
-... Hab kein Bock mehr auf Doku. Es ist eigentlich selbsterklärend, wenn man sich den Code anschaut.
-
-test starten mit:
-```
-$ php controller.php [testfunction] [repeats] [output.csv]
-```
+![Bild](20200111093456.png)
