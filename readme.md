@@ -1,14 +1,15 @@
-# PerformanceTest
-Testet die Performance von ein paar Programmiersprachen
-Getestet wird die Performance der Sprachen mittels Bubblesort, dabei führt der Controller(controller.php) die einzelnen Programme aus.
+# PerformanceTests
+Der Controller testet die Performance verschiender Programmiersprachen, mittels der hinterlegten Algorithmen. Als Beispiel ist der BubbleSort hinterlegt. Die Performancezeiten werden als csv abgespeichert.
 
-# TestAlgorithmus als Pseudo
+# BubbleSort als Pseudo
 ```
-bubbleSort(Array A)
-  for (n=A.size; n>1; --n){
+bubbleSort(Array A,int length)
+  for (n=length; n>1; --n){
     for (i=0; i<n-1; ++i){
       if (A[i] > A[i+1]){
-        A.swap(i, i+1)
+        tmp = A[i];
+        A[i] = A[i+1];
+        A[i+1] = tmp;
       } // Ende if
     } // Ende innere for-Schleife
   } // Ende äußere for-Schleife
@@ -24,5 +25,5 @@ https://www.diagrammerstellen.de/graph?selected_graph=line
 
 test starten mit:
 ```
-$ php controller.php [repeats] [output.csv]
+$ php controller.php [testfunction] [repeats] [output.csv]
 ```
