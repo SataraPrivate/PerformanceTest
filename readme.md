@@ -22,7 +22,7 @@ $ php controller.php [testfunction] [repeats] [output.csv]
 ```
 
 # Darstellung
-Auf der Seite kann man das sich generierte csv Graphisch Darstellen lassen
+Auf der verlinkten Seite kann man das sich generierte csv graphisch darstellen lassen.
 https://www.diagrammerstellen.de/graph?selected_graph=line
 
 ![Bild](20200111093456.png)
