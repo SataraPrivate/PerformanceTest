@@ -16,11 +16,9 @@ let array = [];
 for (let i = 0; i < size; i++) {
     array[i] = size - i;
 }
-
-let start = Date.now();
+let start = process.hrtime();
 test(array, size);
-let end = Date.now();
+let end = process.hrtime();
 
-console.log((end - start) * 1000 + "[micros]");
-
-
+let diff = [end[0]-start[0], end[1]-start[1]];
+console.log(((diff[0]*1000000000+diff[1])/1000) +"[micros]");

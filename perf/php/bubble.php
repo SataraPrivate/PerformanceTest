@@ -18,9 +18,8 @@ $array = [];
 for ($i = 0; $i < $size; $i++) {
     $array[$i] = $size - $i;
 }
-
 $start = microtime(true);
 test($array, $size);
 $end = microtime(true);
 
-echo (($end - $start) * 1000000) . '[micros]' . PHP_EOL;
+echo (($end - $start) * 1000000) . '[micros]'.(extension_loaded ( "xdebug" )?'xdebug':"") . PHP_EOL;

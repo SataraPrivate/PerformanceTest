@@ -25,6 +25,6 @@ class Main{
 			test(array, size);
 			end = System.nanoTime();
 
-			System.out.println( (end-start)/1000+"[micros]");
+			System.out.println( ((end-start)/1000)+"[micros]");
 	}
 }

@@ -10,11 +10,11 @@ def test(array, length):
                 array[i+1]=tmp
 
 size = int(sys.argv[1])
-array = range(size, 0, -1)
+array = list(range(size, 0, -1))
 
 start = datetime.datetime.now()
 test(array, size)
 end = datetime.datetime.now()
+
 diff = end-start
 print( str(diff.seconds) + str(diff.microseconds).rjust(6,"0") + "[micros]")
-

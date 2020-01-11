@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 void test(int* array, int length){
 	int tmp;
 	for (int n= length; n>1; --n){

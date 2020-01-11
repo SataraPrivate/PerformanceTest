@@ -12,11 +12,6 @@ define("PERF_DIR", "perf/");
  * $1 gibt die Position der Argumente an
  */
 $languages = [
-    "PHP" => [
-        "name" => "PHP",
-        "exec" => "php $0 $1",
-        "extension" => "php"
-    ],
     "C" => [
         "name" => "C",
         "exec" => "gcc $0 -o c && ./c $1",
@@ -27,21 +22,36 @@ $languages = [
         "exec" => "g++ $0 -o cpp && ./cpp $1",
         "extension" => "cpp"
     ],
+    "Java" => [
+        "name" => "Java",
+        "exec" => "java $0 $1",
+        "extension" => "java"
+    ],
     "JS" => [
         "name" => "JavaScript",
         "exec" => "node $0 $1",
         "extension" => "js"
     ],
-    "Python" => [
+    "Python2" => [
         "name" => "Python",
-        "exec" => "python $0 $1",
+        "exec" => "python2 $0 $1",
         "extension" => "py"
     ],
-    "Java" => [
-        "name" => "Java",
-        "exec" => "java $0 $1",
-        "extension" => "java"
-    ]
+    "Python3" => [
+        "name" => "Python",
+        "exec" => "python3 $0 $1",
+        "extension" => "py"
+    ],
+    "PHP" => [
+        "name" => "PHP",
+        "exec" => "sudo phpdismod xdebug && php $0 $1",
+        "extension" => "php"
+    ],
+    "PHP with xDebug" => [
+        "name" => "PHP",
+        "exec" => "sudo phpenmod xdebug && php $0 $1",
+        "extension" => "php"
+    ],
 ];
 /*
  * Configuration
@@ -50,7 +60,7 @@ $languages = [
 $testConfs = [
     "bubble" => [
         "firstElementSize" => 500,
-        "lastElementSize" => 5000,
+        "lastElementSize" => 10000,
         "step" => 500
     ]
 ];
@@ -64,8 +74,8 @@ foreach ($tests as $test) {
     $outputFile = $argv[3] ?? $test . "-result.csv";
     saveResultAsCSV($controller->test($test), $outputFile);
 }
-unlink("c");
-unlink("cpp");
+@unlink("c");
+@unlink("cpp");
 
 class TestController
 {
@@ -142,7 +152,7 @@ class TestController
         for ($s = 0; $s < $repeats; $s++) {
             $return = exec($command . ' ' . $args);
             if (is_callable($logger)) $logger($args . "\t|\t" . $return);
-            preg_match('/^(.*?)\[micros\]$/', $return, $match);
+            preg_match('/^(.*?)\[micros\]/', $return, $match);
             //Durchschnitt berechnen
             $result = ($result * $s + intval($match[1])) / ($s + 1);
         }
