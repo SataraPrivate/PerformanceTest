@@ -13,46 +13,45 @@ define("PERF_DIR", "perf/");
  */
 $languages = [
     "C" => [
-        "name" => "C",
         "exec" => "gcc $0 -o c && ./c $1",
         "extension" => "c"
     ],
     "C++" => [
-        "name" => "C++",
         "exec" => "g++ $0 -o cpp && ./cpp $1",
         "extension" => "cpp"
     ],
     "Java" => [
-        "name" => "Java",
         "exec" => "java $0 $1",
         "extension" => "java"
     ],
     "JS" => [
-        "name" => "JavaScript",
         "exec" => "node $0 $1",
         "extension" => "js"
     ],
     "Python2" => [
-        "name" => "Python",
         "exec" => "python2 $0 $1",
         "extension" => "py"
     ],
     "Python3" => [
-        "name" => "Python",
         "exec" => "python3 $0 $1",
         "extension" => "py"
     ],
     "PHP" => [
-        "name" => "PHP",
-        "exec" => "sudo phpdismod xdebug && php $0 $1",
-        "extension" => "php"
-    ],
-    "PHP with xDebug" => [
-        "name" => "PHP",
-        "exec" => "sudo phpenmod xdebug && php $0 $1",
+        "exec" => "php $0 $1",
         "extension" => "php"
     ],
 ];
+if (posix_getuid() == 0) {
+    $languages["PHP"] = [
+        "exec" => "sudo phpdismod xdebug && php $0 $1",
+        "extension" => "php"
+    ];
+    $languages["PHP with xDebug"] = [
+        "exec" => "sudo phpenmod xdebug && php $0 $1",
+        "extension" => "php"
+    ];
+}
+
 /*
  * Configuration
  * Name must be equals filename
@@ -152,7 +151,7 @@ class TestController
         for ($s = 0; $s < $repeats; $s++) {
             $return = exec($command . ' ' . $args);
             if (is_callable($logger)) $logger($args . "\t|\t" . $return);
-            preg_match('/^(.*?)\[micros\]/', $return, $match);
+            preg_match('/^(\d*\.?\d*)\[micros\]/', $return, $match);
             //Durchschnitt berechnen
             $result = ($result * $s + intval($match[1])) / ($s + 1);
         }
